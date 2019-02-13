@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pixToPer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="author" content="Waldir Bolanos">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="vendor/bootstrap-4.3.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/css/style.min.css">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134344925-1"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-134344925-1');
+    </script>
+</head>
+<body>
+    <div id="container">
+            <div class="row mb-3 h-100 overflow-hidden">
+                <div class="col-md-9 themed-grid-col bg1">
+                    <div id="boxContainer">
+                        <div id="boxElement">El</div>
+                    </div>    
+                </div>
+                <div class="col-md-3 themed-grid-col bgWhite">
+                    <h4>Container dimention</h4>
+                    <div class="inputGroup bgGrey1">
+                        <input type="text" id="input-cont-w" class="inputVal" data-type="width" data-el="#boxContainer" value="300" type="number">
+                        <spn class="notation">x</spn>
+                        <input type="text" id="input-cont-h" class="inputVal" data-type="height" data-el="#boxContainer" value="300" type="number">
+                    </div>
+                    <h4>Element dimention</h4>
+                    <div class="inputGroup bgGrey1">
+                        <input type="text" id="input-el-w" class="inputVal" data-type="width" data-el="#boxElement" value="10" type="number">
+                        <spn class="notation">x</spn>
+                        <input type="text" id="input-el-h" class="inputVal" data-type="height" data-el="#boxElement" value="10" type="number">
+                    </div>
+                    <h4>Element possition</h4>
+                    <div class="inputGroup bgGrey1">
+                        <input type="text" id="input-el-t" class="inputVal" data-type="top" data-el="#boxElement" value="50" type="number">
+                        <input type="text" id="input-el-l" class="inputVal" data-type="left" data-el="#boxElement" value="50" type="number">
+                    </div>
+                </div>
+            </div>
+    </div>
+    <script src="vendor/js/jquery-3.3.1.min.js"></script>
+    <script src="vendor/bootstrap-4.3.0-dist/js/bootstrap.min.js"></script>
+    <script src="vendor/js/index.js"></script>
+</body>
+</html>
