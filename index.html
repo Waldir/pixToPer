@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>pixToPer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixToPer - A tool that turns pixels to percentages</title>
+    <meta name="description" content="This tool will make it easier to possition elements inside a responsive container by turning pixels into percentages for the top, left, width, height, and bottom properties.">
+    <meta name="keywords" content="css tool pixels percentages calculator Waldir Bolanos">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Waldir Bolanos">
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="stylesheet" href="vendor/css/style.min.css">
+    <link rel="stylesheet" href="vendor/css/style.min.css?v=1.0">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134344925-1"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script>
@@ -29,14 +31,13 @@
                 </div>
                 <!-- top -->
                 <div id="incNav">
-                    <span>Include: </span>
-                    <input type="checkbox" id="inc-w" class="checkboxVal mx-2" checked>Width
-                    <input type="checkbox" id="inc-h" class="checkboxVal mx-2" checked>Height
-                    <input type="checkbox" id="inc-t" class="checkboxVal mx-2" checked>Top
-                    <input type="checkbox" id="inc-l" class="checkboxVal mx-2" checked>Left
-                    <input type="checkbox" id="inc-b" class="checkboxVal mx-2">Bottom
-                    <input type="checkbox" id="inc-r" class="checkboxVal mx-2">Right
-                    <input type="number" size="1" id="inc-d" class="inputSmall" max="7" min="0" value="6"> Decimals
+                    <span class="d-inline-block"><input type="checkbox" id="inc-w" class="mx-2" checked>Width</span>
+                    <span class="d-inline-block"><input type="checkbox" id="inc-h" class="mx-2" checked>Height</span>
+                    <span class="d-inline-block"><input type="checkbox" id="inc-t" class="mx-2" checked>Top</span>
+                    <span class="d-inline-block"><input type="checkbox" id="inc-l" class="mx-2" checked>Left</span>
+                    <span class="d-inline-block"><input type="checkbox" id="inc-b" class="mx-2">Bottom</span>
+                    <span class="d-inline-block"><input type="checkbox" id="inc-r" class="mx-2">Right</span>
+                    <span class="d-inline-block"><input type="number" size="1" id="inc-d" class="inputSmall" max="9" min="0" value="7"> Decimals</span class="d-inline-block">
                 </div>
                 <!-- /top -->
             </div>
@@ -66,18 +67,64 @@
                     </div>
                 </div>
                 <div id="outputCode" class="bg1 mb-3">
-                        <pre class="bg1"><code id="codeToCopy"></code></pre>
-                        <br>
-                        <button id="copyToClipBtn" class="myBtn">Copy to Clipboard</button>
+                    <pre class="bg1"><code id="codeToCopy"></code></pre>
                 </div>
+                <div id="icons" class="text-center py-3">
+                    <img src="/images/clipboard.svg" id="copyToClipBtn" alt="Copy to clipboard" title="Copy to clipboard" class="mx-3">
+                    <img src="/images/info.svg" id="infoBtn" alt="Click for info" title="Click for info" class="mx-3">
+                    <!--a href="https://github.com/Waldir/pixToPer" target="_blank"><img src="/images/git.svg" alt="Git" class="mx-3"></a-->
+                    <a href="http://waldirb.com" target="_blank" title="Made by Waldir Bolanos"><img src="/images/logo.svg" alt="Made by Waldir Bolanos" class="mx-3"></a>
                 </div>
             </div>
+        </div>
             <!-- Nav row-->
-
     </div>
-    <textarea class="offScreen" id="hiddenTextarea"></textarea>
+    <div class="modal">
+        <div class="modal__dialog">
+                <img src="/images/closeBtn.svg" class="closeBtn m-3" alt="Close">
+                <h2>Pixels to Percentages tool</h2>
+                <div class="px-4">
+                    Welcome! I've created this tool in order to make it easier to possition elements inside a responsive container by turning pixels into percentages for the <i>top, left, width, height,</i> and <i>bottom</i> properties.
+                </div>
+                <h3>Pasting a string of numbers</h3>
+                <div class="px-4">
+                    You can paste a four number comma separated string into the first box of the <i>"Element dimensions"</i> and the numbers will be distributed to all the boxes. i.e: <i>50, 50, 358, 486</i><br>
+                    This can be very useful if you use scripts in order to quickly extract these properties from programs such as Adobe Illustrator.
+                </div>
+                <h3>Include</h3>
+                <div class="px-4">
+                    The include checkboxes allow you to add or subtract element properties to the css code.<br>
+                    Keep in mind that for positioning, in most cases you will only need a y and x combination of properties. 
+                    For example <i>top + left</i> will work just as well as <i>bottom + right</i>. 
+                    However, including a <i>bottom</i> property when you already have a <i>top</i> property can be redundant.<br>
+                    An instance where you can exclude a <i>height</i> property is when the element will have an image inside it with 
+                    100% width and will automatically push down the element to match the image's aspect ratio.
+                </div>
+                <h3>Decimal places</h3>
+                <div class="px-4">
+                    You can change the amount of decimal places for the css percentages but keep in mind that more decimals equals more accuracy. Also keep in mind browser support as some browsers truncate decimals.
+                </div>
+                <h3>The container</h3>
+                <div class="px-4">
+                    The container in this tool is not of actual size but it does keep the correct aspect ratio in order to give an acurate visual representation.
+                </div>
+                <h3>The HTML</h3>
+                <div class="px-4">
+                    <code>
+                        &lt;div id="container"&gt;<br>
+                        &nbsp;&nbsp;&lt;div id="element"&gt;&lt;/div&gt;<br>
+                        &lt;/div&gt;
+                    </code>
+                </div>
+                <h3>Copy to clipboard</h3>
+                <div class="px-4">
+                    Clicking on the <img src="/images/clipboard.svg" width="10"> icon will copy all the generated css into your clipboard.
+                </div>
+                <div class="text-right"><br>Enjoy!</div>
+        </div>
+    </div>
     <script src="vendor/js/jquery-3.3.1.min.js"></script>
     <script src="vendor/js/jquery.coin.min.js"></script>
-    <script src="vendor/js/index.js"></script>
+    <script src="vendor/js/index.min.js?v=1.01"></script>
 </body>
 </html>

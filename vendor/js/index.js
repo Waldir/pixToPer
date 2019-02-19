@@ -17,8 +17,13 @@ function decimalPlace(num, places) {
 }
 
 function copyToClip() {
-    document.getElementById('hiddenTextarea').select();
+    var toCopy = $('#codeToCopy').text();
+    var $temp = $('<textarea/>', { id: 'tempInput' });
+    $('body').append($temp);
+    $('#tempInput').val(toCopy).select();
     document.execCommand('copy');
+    $('#tempInput').remove();
+    return false;
 }
 
 function getRandFromArr(arr) {
@@ -50,8 +55,7 @@ function init() {
     // prevent too many decimals
     $('#inc-d').on('keydown', function fn(e) {
         var code = e.keyCode || e.which;
-        addLog('code: ', code);
-        if (this.value.length === 1 && code !== 38 && code !== 40 && code !== 8) {
+        if (this.value.length === 2 && code !== 38 && code !== 40 && code !== 8) {
             e.preventDefault();
             return false;
         }
@@ -146,6 +150,21 @@ function init() {
     });
     // trigger for the first time
     $('#input-el-h').trigger('input');
+    // info btn
+    $('#infoBtn').on('click', function fn() {
+        $('.modal').css('display', 'block');
+        $('body').css('overflow', 'hidden');
+        setTimeout(function fn() { $('.modal, .modal__dialog').addClass('on'); }, 300);
+    });
+    // modal
+    $('.modal, .closeBtn').on('click', function fn(e) {
+        if (e.target === this) {
+            $('.modal__dialog').removeClass('on');
+            $('body').css('overflow', '');
+            setTimeout(function fn() { $('.modal').removeClass('on'); }, 300);
+            setTimeout(function fn() { $('.modal').css('display', 'none'); }, 600);
+        }
+    });
 }
 
 $(document).ready(init);
