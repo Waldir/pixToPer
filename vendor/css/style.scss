@@ -1,51 +1,8 @@
-@import 'mixins';
-@import 'bootstrap';
-
-@mixin bp-md {
-    @media only screen and (min-width: 769px) { @content; }
-}
+@import 'utilities/mixins';
+@import 'utilities/bootstrap';
+@import 'utilities/ease';
 
 // variables
-// Cubic
-$easeInCubic     :  cubic-bezier(0.550, 0.055, 0.675, 0.190);
-$easeOutCubic    :  cubic-bezier(0.215, 0.610, 0.355, 1.000);
-$easeInOutCubic  :  cubic-bezier(0.645, 0.045, 0.355, 1.000);
-
-// Circ
-$easeInCirc      :  cubic-bezier(0.600, 0.040, 0.980, 0.335);
-$easeOutCirc     :  cubic-bezier(0.075, 0.820, 0.165, 1.000);
-$easeInOutCirc   :  cubic-bezier(0.785, 0.135, 0.150, 0.860);
-
-// Expo
-$easeInExpo      :  cubic-bezier(0.950, 0.050, 0.795, 0.035);
-$easeOutExpo     :  cubic-bezier(0.190, 1.000, 0.220, 1.000);
-$easeInOutExpo   :  cubic-bezier(1.000, 0.000, 0.000, 1.000);
-
-// Quad
-$easeInQuad      :  cubic-bezier(0.550, 0.085, 0.680, 0.530);
-$easeOutQuad     :  cubic-bezier(0.250, 0.460, 0.450, 0.940);
-$easeInOutQuad   :  cubic-bezier(0.455, 0.030, 0.515, 0.955);
-
-// Quart
-$easeInQuart     :  cubic-bezier(0.895, 0.030, 0.685, 0.220);
-$easeOutQuart    :  cubic-bezier(0.165, 0.840, 0.440, 1.000);
-$easeInOutQuart  :  cubic-bezier(0.770, 0.000, 0.175, 1.000);
-
-// Quint
-$easeInQuint     :  cubic-bezier(0.755, 0.050, 0.855, 0.060);
-$easeOutQuint    :  cubic-bezier(0.230, 1.000, 0.320, 1.000);
-$easeInOutQuint  :  cubic-bezier(0.860, 0.000, 0.070, 1.000);
-
-// Sine
-$easeInSine      :  cubic-bezier(0.470, 0.000, 0.745, 0.715);
-$easeOutSine     :  cubic-bezier(0.390, 0.575, 0.565, 1.000);
-$easeInOutSine   :  cubic-bezier(0.445, 0.050, 0.550, 0.950);
-
-// Back
-$easeInBack      :  cubic-bezier(0.600, -0.280, 0.735, 0.045);
-$easeOutBack     :  cubic-bezier(0.175,  0.885, 0.320, 1.275);
-$easeInOutBack   :  cubic-bezier(0.680, -0.550, 0.265, 1.550);
-
 $color1: #ffffff;
 $color2: #fafafb;
 $color3: #f5f5f5;
@@ -57,25 +14,22 @@ $color7: #ff9142;
 html, body{
     @include font-size(16px);
     @include serif-font();
+    @extend %w-100, %h-100;
     margin: 0;
     padding: 0;
     color: $color5;
-    height: 100%;
-    min-height: 100%; 
-    width: 100%;
+    min-height: 100%;
 }
 
 body{
     @include gradient($color2, 1, $color3, 1, top, bottom, 100%);
 }
 
-*, :after, :before{
-    @include box-sizing();
-}
+*, *:after, *:before { @include box-sizing(border-box); }
 
 input[type=number],
 input[type=number] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button{
         -webkit-appearance: none;
@@ -92,12 +46,11 @@ input[type=number] {
 .bg7{ background-color: $color7; }
 
 #container{
-    width: 100%;
-    height: 100%;
+    @extend %w-100, %h-100;
 }
 
 #myBox{
-    position: relative;
+    @include relative();
     margin: 5% auto;
     width: 60%;
     min-width: 200px;
@@ -120,15 +73,14 @@ input[type=number] {
 
 #myBox__container{
     @include transition(all 600ms $easeOutBack);
-    position: relative;
-    width: 100%;
-    height: 0;
+    @include relative();
+    @extend %w-100, %h-0;
     padding-top: 0;
 }
 
 #myBox__element{
     @include transition(all 600ms $easeOutBack);
-    position: absolute;
+    @include absolute();
     border: 2px solid $color5;
     background: $color4;
 }
@@ -140,6 +92,7 @@ code{
 
 .inputSmall{
     @include font-size(16px);
+    width: 40px;
 }
 
 
@@ -147,61 +100,49 @@ code{
 .inputVal{
     background: transparent;
     text-align: center;
+    text-align-last: center;
     outline: 0;
     border: none;
 }
 .inputVal{
+    @extend %w-50;
     font-size: 24px;
-    width: 50%;
     margin-left: -4px;
 }
 
-.notation{ 
+.notation{
     @include translate(-50%, -50%);
-    position: absolute;
-    left: 50%;
-    top: 50%;
+    @include absolute(top 50% left 50%);
 }
 
 .inputGroup{
-    position: relative;
+    @include relative();
 }
 
-.radius-lb{ @include border-radius-plus($bl: 10px); }
-
-.offScreen{
-    position: absolute;
-    left: -9999px;
-    top: 0;
-}
+.offScreen{ @include absolute(left -9999px top 0); }
 
 .speech-bubble {
-	position: relative;
+    @include relative();
+    @include border-radius(0.9em);
 	background: $color6;
-    border-radius: .9em;
     padding: 0.5em 1.4em;
     font-weight: bold;
     color: $color4;
-    // text-shadow: 0 -0.05em 0.1em rgba(0,0,0,.3);
-}
-
-.speech-bubble:after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border: 0.563em solid transparent;
-	border-top-color: $color6;
-	border-bottom: 0;
-	border-left: 0;
-	margin-left: -0.281em;
-	margin-bottom: -0.562em;
+    &::after {
+        content: '';
+        @include absolute(bottom 0 left 50%);
+        @extend %w-0, %h-0;
+        border: 0.563em solid transparent;
+        border-top-color: $color6;
+        border-bottom: 0;
+        border-left: 0;
+        margin-left: -0.281em;
+        margin-bottom: -0.562em;
+    }
 }
 
 #outputCode{
-    width: 100%;
+    @extend %w-100;
     padding: 32px 24px;
     pre{
         padding: 0;
@@ -210,16 +151,15 @@ code{
         font-size: 1em;
         white-space: pre-wrap;
     }
-    @include bp-md{
-        @include border-radius(20px);
+    @include breakpoint(md){
+        @include border-radius(0.8em);
     }
 }
 
 #sideNav{
-    position: absolute;
-    overflow: hidden;
-    width: 100%;
-    @include bp-md{
+    @include absolute();
+    @extend %w-100, %overflow-hidden;
+    @include breakpoint(md){
         max-width: 375px;
         right: 0;
         top: 0;
@@ -227,33 +167,32 @@ code{
 }
 
 #mainStage{
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    @include bp-md{
+    @include relative();
+    @extend %w-100, %overflow-hidden;
+    @include breakpoint(md){
         width: calc(100% - 375px);
         height: 100vh;
     }
 }
 
-#incNav{
-    width: 100%;
+#incNav{ 
+    @extend %w-100;
     padding: 1rem;
-    @include bp-md{
+    text-align: center;
+    @include breakpoint(md){
+        @include fixed(bottom 0);
         width: calc(100% - 375px);
-        position: fixed;
-        bottom: 0;
     }
 }
 
 #icons{
-    img{ 
+    img{
         @include transition(opacity 800ms ease-out);
         cursor: pointer;
-        width: 1.8rem; 
+        width: 1.8rem;
         @include opacity(0.5);
         &:hover{ @include opacity(1); }
-        @include bp-md{
+        @include breakpoint(md){
             width: 2rem;
         }
     }
@@ -262,9 +201,9 @@ code{
 .modal,
 .modal__dialog{
     @include opacity(0);
+    @extend %overflow-hidden;
     pointer-events: none;
-    overflow: hidden; 
-    &.on{ 
+    &.on{
         @include opacity(1);
         pointer-events: auto;
     }
@@ -272,10 +211,9 @@ code{
 
 .modal{
     @include transition(opacity 150ms linear);
-    top: 0; bottom: 0; left: 0; right: 0;
-    position: fixed;
+    @include fixed(top 0 bottom 0 left 0 right 0);
+    @extend %w-100, %h-100;
     display: none;
-    @extend .w-100, .h-100;
     background: rgba(0, 0, 0, 0.7);
     overflow-x: hidden;
     overflow-y: scroll;
@@ -286,14 +224,12 @@ code{
     @include transition(opacity 300ms ease, transform 300ms ease);
     @include translateY(-25%);
     @include border-radius(0.5rem);
-    @extend .bg1, .px-4, .py-4;
-    position: relative;
+    @extend .bg1, .p-4;
+    @include relative();
     margin: 0.75rem;
     width: auto;
-    &.on{
-        @include translateY(0);
-    }
-    @include bp-md{
+    &.on{ @include translateY(0); }
+    @include breakpoint(md){
         margin: 3rem auto;
         max-width: 80%;
         padding: 2rem 3rem;
@@ -301,12 +237,10 @@ code{
 }
 
 .closeBtn{
-    position: absolute;
+    @include absolute(top 0 right 0);
     cursor: pointer;
-    top: 0;
-    right: 0;
     width: 2rem;
-    @include bp-md{
+    @include breakpoint(md){
         width: 1rem;
     }
 }
